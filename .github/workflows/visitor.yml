@@ -1,0 +1,21 @@
+---
+name: Flat
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+  schedule:
+    # - cron: '59 23 * * *'  # at 23.59 every day
+    - cron: 0/5 * * * *  # every 5th minute
+jobs:
+  test:
+    name: Test puppeteer
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+      - name: Test action
+        uses: ./
+        id: puppeteer-test
+        with:
+          files: targets.js
